@@ -71,15 +71,14 @@
         @try {
             NSString *zipURL = [command.arguments objectAtIndex:0];
             NSString *destinationURL = [command.arguments objectAtIndex:1];
-            NSError *error;
             
             NSString *zipPath = [self pathForURL:zipURL];
             NSString *destinationPath = [self pathForURL:destinationURL];
             
-            if ([SSZipArchive createZipFileAtPath:zipPath withContentsOfDirectory:destinationPath]) {
+            if ([SSZipArchive createZipFileAtPath:destinationPath withContentsOfDirectory:zipPath]) {
                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
             } else {
-                NSLog(@"%@ - %@", @"Error occurred during zipping", [error localizedDescription]);
+                NSLog(@"Error occurred during zipping");
                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Error occurred during zipping"];
             }
             
