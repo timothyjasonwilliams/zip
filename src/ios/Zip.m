@@ -61,4 +61,34 @@
     [pluginResult setKeepCallbackAsBool:YES];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:self->_command.callbackId];
 }
+
+- (void)zip:(CDVInvokedUrlCommand*)command
+{
+    self->_command = command;
+    [self.commandDelegate runInBackground:^{
+        CDVPluginResult* pluginResult = nil;
+        
+        @try {
+            NSString *zipURL = [command.arguments objectAtIndex:0];
+            NSString *destinationURL = [command.arguments objectAtIndex:1];
+            NSError *error;
+            
+            NSString *zipPath = [self pathForURL:zipURL];
+            NSString *destinationPath = [self pathForURL:destinationURL];
+            
+            if ([SSZipArchive createZipFileAtPath:zipPath withContentsOfDirectory:destinationPath]) {
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+            } else {
+                NSLog(@"%@ - %@", @"Error occurred during zipping", [error localizedDescription]);
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Error occurred during zipping"];
+            }
+            
+        } @catch(NSException* exception) {
+            NSLog(@"%@ - %@", @"Error occurred during zipping", [exception debugDescription]);
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Error occurred during zipping"];
+        }
+        
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }];
+}
 @end

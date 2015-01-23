@@ -11,4 +11,6 @@
 - (void)unzip:(CDVInvokedUrlCommand*)command;
 - (void)zipArchiveProgressEvent:(NSInteger)loaded total:(NSInteger)total;
 
+- (void)zip:(CDVInvokedUrlCommand*)command;
+
 @end

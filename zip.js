@@ -25,3 +25,17 @@ exports.unzip = function(fileName, outputDirectory, callback, progressCallback) 
     };
     exec(win, fail, 'Zip', 'unzip', [fileName, outputDirectory]);
 };
+
+exports.zip = function(contentsOfDirectory, outputDirectory, callback) {
+    var win = function(result) {
+        if (callback) {
+            callback(0);
+        }
+    };
+    var fail = function(result) {
+        if (callback) {
+            callback(-1);
+        }
+    };
+    exec(win, fail, 'Zip', 'zip', [contentsOfDirectory, outputDirectory]);
+};
