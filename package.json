@@ -1,0 +1,33 @@
+{
+  "name": "cordova-plugin-zip",
+  "version": "3.1.0",
+  "description": "Unzips zip files",
+  "cordova": {
+    "id": "cordova-plugin-zip-cld",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Creative-Licence-Digital/zip"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.3.0"
+    }
+  ],
+  "author": "",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/MobileChromeApps/zip/issues"
+  },
+  "homepage": "https://github.com/MobileChromeApps/zip"
+}
